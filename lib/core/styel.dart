@@ -28,12 +28,12 @@ abstract class AppStyles {
       fontWeight: FontWeight.bold,
     );
   }
-  static TextStyle styleregu20(context) {
+  static TextStyle stylesemi20(context) {
     return TextStyle(
      color: Colors.black,
       fontSize: getResponsiveFontSize(context, fontSize: 20),
       fontFamily: 'cairo',
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w700,
     );
  
   }
