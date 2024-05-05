@@ -1,4 +1,5 @@
 import 'package:ah/core/styel.dart';
+import 'package:ah/feuters/alarim/presention/view/alrim.dart';
 import 'package:ah/feuters/home/prestion/view/widget/bodyhome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -13,7 +14,7 @@ class HomeScreeN extends StatefulWidget {
 class _HomeScreeNState extends State<HomeScreeN> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [const BodyHome()];
+  final List<Widget> _screens = [const BodyHome(),alarim()];
 
   void _onItemTapped(int index) {
     setState(() {
