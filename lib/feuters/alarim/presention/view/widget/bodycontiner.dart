@@ -1,12 +1,13 @@
+import 'package:ah/feuters/add/data/modeladdd.dart';
 import 'package:ah/feuters/alarim/presention/view/widget/infodurg.dart';
 import 'package:ah/feuters/alarim/presention/view/widget/iteamaction.dart';
 import 'package:flutter/material.dart';
 
 class bodycontiner extends StatelessWidget {
   const bodycontiner({
-    super.key,
+    super.key, required this.addmodel,
   });
-
+   final Addmodel addmodel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,8 +17,8 @@ class bodycontiner extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
        
-          infodurg(),
-          IteamAction()
+          infodurg(addmodel: addmodel,),
+          IteamAction(addmodel:addmodel,)
         ],
       ),
     );

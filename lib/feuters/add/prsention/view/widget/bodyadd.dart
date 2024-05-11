@@ -1,8 +1,16 @@
+
+
+import 'package:ah/core/local_noif.dart';
 import 'package:ah/core/styel.dart';
+import 'package:ah/feuters/add/data/modeladdd.dart';
+import 'package:ah/feuters/add/prsention/manager/cubit/add_cubit.dart';
 import 'package:ah/feuters/add/prsention/view/widget/durgtype.dart';
 import 'package:ah/feuters/add/prsention/view/widget/info.dart';
 import 'package:ah/feuters/add/prsention/view/widget/textform.dart';
+
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Bodyadd extends StatefulWidget {
   const Bodyadd({Key? key}) : super(key: key);
@@ -30,12 +38,12 @@ class _BodyaddState extends State<Bodyadd> {
           SizedBox(
             height: MediaQuery.of(context).size.height * .015,
           ),
-          const CustomTextFormFiled(titel: 'اسم الدواء', action: 'اسم الدواء'),
+          const CustomTextFormFiled(titel: 'اسم الدواء', action: 'اسم الدواء', title: '',),
           const SizedBox(
             height: 12,
           ),
           const CustomTextFormFiled(
-              titel: 'اسم الدكتور', action: 'اسم الدكتور'),
+              titel: 'اسم الدكتور', action: 'اسم الدكتور', title: '',),
           const SizedBox(
             height: 15,
           ),
@@ -90,7 +98,11 @@ class _BodyaddState extends State<Bodyadd> {
             children: [
               Expanded(
                   child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  localnotiftion.repNotifaction();
+                 BlocProvider.of<AddCubit>(context).AddAlamrim(Addmodel(docname: "اسامه", durgname: "بنا", hours: "2"));
+                 Navigator.pop(context);                 
+                },
                 style: TextButton.styleFrom(backgroundColor: Colors.blue),
                 child: Text(
                   "حفظ",
@@ -121,14 +133,26 @@ class _BodyaddState extends State<Bodyadd> {
       setState(() {
         _selectedTime = pickedTime;
       });
-    }
+    } 
   }
 
   String _formatTime(TimeOfDay time) {
-    // تحويل الوقت إلى تنسيق 12 ساعة
-    final now = DateTime.now();
-    final timeString =
-        '${time.hourOfPeriod}:${time.minute.toString().padLeft(2, '0')} ${time.period == DayPeriod.am ? 'ص' : 'م'}';
-    return timeString;
-  }
+  // Get the current date to create a complete DateTime object
+  final now = DateTime.now();
+  
+  // Construct a DateTime object with the same date but with the selected time
+  final selectedDateTime = DateTime(
+    now.year,
+    now.month,
+    now.day,
+    time.hour,
+    time.minute,
+  );
+
+  // Format the DateTime object into a string in the required format
+  final formattedTime = selectedDateTime.toString();
+
+  return formattedTime;
+}
+
 }

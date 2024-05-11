@@ -1,7 +1,9 @@
 import 'package:ah/core/styel.dart';
 import 'package:ah/feuters/add/prsention/view/add.dart';
+import 'package:ah/feuters/alarim/presention/manager/cubit/get_cubit.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widget/bodyalarim.dart';
 
@@ -15,27 +17,34 @@ class alarim extends StatefulWidget {
 class _alarimState extends State<alarim> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "اضافه منبه ",
-          style: AppStyles.stylebold24(context),
+    return BlocProvider(
+      create: (context) => GetCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "اضافه منبه ",
+            style: AppStyles.stylebold24(context),
+          ),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: Icon(
+                Icons.alarm_outlined,
+                color: Colors.blue,
+              ),
+            )
+          ],
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Icon(
-              Icons.alarm_outlined,
-              color: Colors.blue,
-            ),
-          )
-        ],
+        body: Bodalarim(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (builder) => AddAlamrim()));
+          },
+          child: Icon(Icons.add),
+          backgroundColor: Colors.blue.shade200,
+        ),
       ),
-      body: Bodalarim(),
-      
-      floatingActionButton: FloatingActionButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (builder)=>AddAlamrim()));},
-      child: Icon(Icons.add),backgroundColor: Colors.blue.shade200,),
     );
   }
 }
-

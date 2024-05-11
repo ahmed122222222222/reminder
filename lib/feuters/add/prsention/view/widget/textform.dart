@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormFiled extends StatelessWidget {
   const CustomTextFormFiled(
-      {super.key, required this.titel, required this.action});
+      {super.key, required this.titel, required this.action, required String title});
   final String titel, action;
   @override
   Widget build(BuildContext context) {
