@@ -22,7 +22,7 @@ class _alarimState extends State<alarim> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "اضافه منبه ",
+            "التذكيرات",
             style: AppStyles.stylebold24(context),
           ),
           actions: const [
@@ -36,14 +36,7 @@ class _alarimState extends State<alarim> {
           ],
         ),
         body: Bodalarim(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (builder) => AddAlamrim()));
-          },
-          child: Icon(Icons.add),
-          backgroundColor: Colors.blue.shade200,
-        ),
+      
       ),
     );
   }

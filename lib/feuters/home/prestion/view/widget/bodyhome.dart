@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:ah/core/styel.dart';
+import 'package:ah/feuters/home/prestion/view/widget/colockview.dart';
 import 'package:ah/feuters/home/prestion/view/widget/durglistview.dart';
-import 'package:ah/feuters/home/prestion/view/widget/iteamnextakarim.dart';
+
+import 'package:ah/feuters/home/prestion/view/widget/textcolok.dart';
+
 import 'package:flutter/material.dart';
 
 class BodyHome extends StatefulWidget {
@@ -16,6 +21,31 @@ class _BodyHomeState extends State<BodyHome> {
     const Color(0xff799EFF).withOpacity(.4),
     const Color(0xff009688).withOpacity(.6)
   ];
+
+  late DateTime dateTime; // Declare dateTime as late
+  late Timer timer; // Declare timer
+
+  @override
+  void initState() {
+    super.initState();
+    dateTime = DateTime.now(); // Initialize dateTime
+    // Start a timer to update the time every second
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        // Check if the widget is mounted before updating the state
+        setState(() {
+          dateTime = DateTime.now(); // Update dateTime
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // Cancel the timer when the widget is disposed
+    timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,24 +70,17 @@ class _BodyHomeState extends State<BodyHome> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "التالي",
-                  style: AppStyles.stylesemi20(context)
-                      .copyWith(fontWeight: FontWeight.w700, fontSize: 23),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                IteamnextAlarim(
-                  color: const Color(0xff2A5EE4).withOpacity(.70),
-                ),
+                const colockview(),
+                textcolock(dateTime: dateTime),
                 const SizedBox(
                   height: 30,
                 ),
                 Text(
                   "ادويه اليوم",
-                  style: AppStyles.stylesemi20(context)
-                      .copyWith(fontWeight: FontWeight.w700, fontSize: 23),
+                  style: AppStyles.stylesemi20(context).copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 23,
+                  ),
                 )
               ],
             ),

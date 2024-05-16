@@ -1,8 +1,9 @@
 import 'package:ah/core/styel.dart';
+import 'package:ah/feuters/add/prsention/view/add.dart';
 import 'package:ah/feuters/alarim/presention/view/alrim.dart';
 import 'package:ah/feuters/home/prestion/view/widget/bodyhome.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeScreeN extends StatefulWidget {
   const HomeScreeN({super.key});
@@ -14,7 +15,7 @@ class HomeScreeN extends StatefulWidget {
 class _HomeScreeNState extends State<HomeScreeN> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [const BodyHome(),alarim()];
+  final List<Widget> _screens = [const BodyHome(), const alarim()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -40,6 +41,25 @@ class _HomeScreeNState extends State<HomeScreeN> {
           )
         ],
       ),
+      body: Stack(
+        children: [
+          _screens[_currentIndex],
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => const AddAlamrim()));
+                },
+                backgroundColor: Colors.blue.shade200,
+                child: const Icon(Icons.add),
+              ),
+            ),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         unselectedItemColor: Colors.black12,
@@ -51,20 +71,11 @@ class _HomeScreeNState extends State<HomeScreeN> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorites',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.alarm),
+            label: 'Alarm',
           ),
         ],
       ),
-      body: _screens[_currentIndex],
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:ah/core/local_noif.dart';
+import 'package:ah/core/workmaager.dart';
 import 'package:ah/feuters/add/data/add_model_adapter.dart';
+import 'package:ah/feuters/add/data/modeladdd.dart';
 import 'package:ah/feuters/home/prestion/view/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -8,11 +10,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'generated/l10n.dart';
 void main()async {
    WidgetsFlutterBinding.ensureInitialized(); 
- await localnotiftion.inti();
-  await Hive.initFlutter();
-
+   Hive.initFlutter();
+  await Future.wait([
+    LocalNotification.init(),
+    WorkManagerService().init(),
+  ]);
   Hive.registerAdapter(AddmodelAdapter());
-  Hive.openBox("arlarim");
+  Hive.openBox<Addmodel>("alarim");
   runApp(const MyApp());
 }
 
