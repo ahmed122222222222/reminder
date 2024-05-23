@@ -1,10 +1,9 @@
-import 'package:ah/feuters/add/data/modeladdd.dart';
 import 'package:hive/hive.dart';
-
+import 'package:ah/feuters/add/data/modeladdd.dart';
 
 class AddmodelAdapter extends TypeAdapter<Addmodel> {
   @override
-  final int typeId = 1; // يجب تحديد رقم فريد لهذا النوع
+  final int typeId = 1;
 
   @override
   Addmodel read(BinaryReader reader) {
@@ -12,6 +11,8 @@ class AddmodelAdapter extends TypeAdapter<Addmodel> {
       docname: reader.readString(),
       durgname: reader.readString(),
       hours: reader.readString(),
+      id: reader.readInt(),
+      numberOfAlarms: reader.readInt(), // Read the new field
     );
   }
 
@@ -20,5 +21,7 @@ class AddmodelAdapter extends TypeAdapter<Addmodel> {
     writer.writeString(obj.docname);
     writer.writeString(obj.durgname);
     writer.writeString(obj.hours);
+    writer.writeInt(obj.id);
+    writer.writeInt(obj.numberOfAlarms); // Write the new field
   }
 }

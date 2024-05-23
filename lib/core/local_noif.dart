@@ -58,28 +58,34 @@ class LocalNotification {
     await flutterLocalNotificationsPlugin.cancel(id);
   }
 
-static void scheduleDailyRepeatingNotification(tz.TZDateTime startTime) async {
-    tz.TZDateTime scheduledDate = startTime;
-                                 
-    for (int i = 1; i <= 480; i++) { // 480 notifications for 24 hours at 3-minute intervals
-      await flutterLocalNotificationsPlugin.zonedSchedule(
+static void scheduleDailyRepeatingNotification(tz.TZDateTime startTime, int intervalHours,String body,String name) async {
+  tz.TZDateTime scheduledDate = startTime;
+
+  // حساب عدد التنبيهات في اليوم بناءً على الفاصل الزمني بالساعات
+  int numberOfNotifications = 24 ~/ intervalHours;
+log("id of local ${UniqueIdGenerator.generate()}");
+  for (int i = 0; i < numberOfNotifications; i++) {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
       UniqueIdGenerator.generate(),
-        "Daily Repeating",
-        "Hi Ahmed, this is a daily repeating notification",
-        scheduledDate,
-        const NotificationDetails(android: AndroidNotificationDetails("id 4", "daily_repeating")),
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-        androidAllowWhileIdle: true,
-        matchDateTimeComponents: DateTimeComponents.time,
-        payload: "daily_repeating",
-      );
-      scheduledDate = scheduledDate.add(const Duration(minutes: 3)); // Add 3 minutes for the next notification
-    }
+      "تذكير لتناول الدواء",
+      "تناول دواء $body",
+      scheduledDate,
+      const NotificationDetails(android: AndroidNotificationDetails("id 4", "daily_repeating")),
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: true,
+      matchDateTimeComponents: DateTimeComponents.time,
+      payload: "اسم الدكتور@$name",
+    );
+    scheduledDate = scheduledDate.add(Duration(hours: intervalHours)); // إضافة الفاصل الزمني بالساعات
   }
+}
 
-  static tz.TZDateTime calculateNextNotificationTime(tz.TZDateTime startTime) {
-    return startTime;
+// دالة لحساب الوقت التالي للتنبيه
+tz.TZDateTime calculateNextNotificationTime(tz.TZDateTime startTime) {
+  return startTime;
+}
+//get pending notifactttion
+static Future<List<PendingNotificationRequest>> getScheduledNotifications() async {
+    return await flutterLocalNotificationsPlugin.pendingNotificationRequests();
   }
-
-
 }

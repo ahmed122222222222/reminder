@@ -15,8 +15,9 @@ class Durglis extends StatelessWidget {
       
       physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 12,
+        itemCount: 3,
         itemBuilder: (context, index) {
+
           // Calculate the index of the color in the colors list
           int colorIndex = index % colors.length;
           // Use the calculated color index to get the color from the colors list

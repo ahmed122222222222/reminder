@@ -10,10 +10,11 @@ class iteamtexyt extends StatelessWidget {
   final String titel;
   final IconData icon;
   @override
+  
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.alarm_on),
+      Icon(icon),
         Text(
           titel,
           style: AppStyles.stylebold15(context)

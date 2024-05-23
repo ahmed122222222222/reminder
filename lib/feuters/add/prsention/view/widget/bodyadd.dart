@@ -1,5 +1,10 @@
 
 
+
+
+import 'dart:developer';
+
+import 'package:ah/core/genratedid.dart';
 import 'package:ah/core/local_noif.dart';
 import 'package:ah/core/styel.dart';
 import 'package:ah/feuters/add/data/modeladdd.dart';
@@ -33,121 +38,126 @@ class _BodyaddState extends State<Bodyadd> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Form(
-        key: globalKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .015,
-            ),
-            CustomTextFormFiled(
-              
-              titel: 'اسم الدواء',
-              action: 'اسم الدواء',
-              title: '',
-              onSaved: (v) {
-                setState(() {
-                  vule1 = v!;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            CustomTextFormFiled(
-              titel: 'اسم الدكتور',
-              action: 'اسم الدكتور',
-              title: '',
-              onSaved: (v) {
-                setState(() {
-                  value2 = v!;
-                });
-              },
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            const InfoTake(),
-            const SizedBox(
-              height: 12,
-            ),
-            Row(
-              children: [
-                Text(
-                  "وقت البدايه",
-                  style: AppStyles.stylebold20(context)
-                      .copyWith(color: Colors.black),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    _selectTime(context);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.access_time),
-                        const SizedBox(width: 8),
-                        Text(
-                          // ignore: unnecessary_string_interpolations
-                          '${_formatTime(_selectedTime)}',
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Form(
+          key: globalKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .015,
+              ),
+              CustomTextFormFiled(
+                
+                titel: 'اسم الدواء',
+                action: 'اسم الدواء',
+                title: '',
+                onSaved: (v) {
+                  setState(() {
+                    vule1 = v!;
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              CustomTextFormFiled(
+                titel: 'اسم الدكتور',
+                action: 'اسم الدكتور',
+                title: '',
+                onSaved: (v) {
+                  setState(() {
+                    value2 = v!;
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const InfoTake(),
+              const SizedBox(
+                height: 12,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "وقت البدايه",
+                    style: AppStyles.stylebold20(context)
+                        .copyWith(color: Colors.black),
                   ),
-                ),
-              ],
-            ),
-            const Divider(height: 40, color: Colors.blue),
-            Text(
-              "نوع الدواء",
-              style:
-                  AppStyles.stylebold20(context).copyWith(color: Colors.black),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Typedurg(),
-            const SizedBox(
-              height: 50,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      if (globalKey.currentState!.validate()) {
- 
-                        globalKey.currentState!.save();
-                        
-                        LocalNotification.scheduleDailyRepeatingNotification(
-                            _formatTime(_selectedTime,));
-                        BlocProvider.of<AddCubit>(context).AddAlamrim(Addmodel(
-                            docname: vule1, durgname: value2, hours: "2"));
-                        Navigator.pop(context);
-                      } else {
-                        autovalidateMode = AutovalidateMode.always;
-                        setState(() {});
-                      }
+                  
+                  InkWell(
+                    onTap: () {
+                      _selectTime(context);
                     },
-                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
-                    child: Text(
-                      "حفظ",
-                      style: AppStyles.stylebold24(context)
-                          .copyWith(color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.access_time),
+                          const SizedBox(width: 8),
+                          Text(
+                            // ignore: unnecessary_string_interpolations
+                            '${_formatTime(_selectedTime)}',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                )
-              ],
-            )
-          ],
+                ],
+              ),
+              const Divider(height: 40, color: Colors.blue),
+              Text(
+                "نوع الدواء",
+                style:
+                    AppStyles.stylebold20(context).copyWith(color: Colors.black),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Typedurg(),
+              const SizedBox(
+                height: 50,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        if (globalKey.currentState!.validate()) {
+                        
+                          globalKey.currentState!.save();
+                           int i =UniqueIdGenerator.generate()+1;
+                          print("id of fkfkkfelfemdcod;mcvdo;cmdo;cd;cdk;cd;c ${i}");
+                        log("id of save ${i}");
+                        log("id umer ${int.tryParse(mo)!}");
+                          LocalNotification.scheduleDailyRepeatingNotification(
+                              _formatTime(_selectedTime,),int.tryParse(mo)!,vule1,value2);
+                          BlocProvider.of<AddCubit>(context).AddAlamrim(Addmodel(
+                              docname: vule1, durgname: value2, hours: memer.toString(), id:i+1 , numberOfAlarms: memer),);
+                             LocalNotification.getScheduledNotifications();  
+                          Navigator.pop(context);
+                        } else {
+                          autovalidateMode = AutovalidateMode.always;
+                          setState(() {});
+                        }
+                      },
+                      style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                      child: Text(
+                        "حفظ",
+                        style: AppStyles.stylebold24(context)
+                            .copyWith(color: Colors.white),
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

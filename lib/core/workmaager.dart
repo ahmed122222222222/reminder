@@ -5,7 +5,7 @@ import 'package:workmanager/workmanager.dart';
 
 class WorkManagerService {
   void registerMyTask() async {
-  
+    //register my task
     await Workmanager().registerPeriodicTask(
       'id1',
       'show simple notification',

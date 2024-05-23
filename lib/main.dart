@@ -12,8 +12,10 @@ void main()async {
    WidgetsFlutterBinding.ensureInitialized(); 
    Hive.initFlutter();
   await Future.wait([
+
     LocalNotification.init(),
     WorkManagerService().init(),
+   
   ]);
   Hive.registerAdapter(AddmodelAdapter());
   Hive.openBox<Addmodel>("alarim");

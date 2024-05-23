@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ah/core/styel.dart';
 import 'package:ah/feuters/add/data/modeladdd.dart';
 import 'package:ah/feuters/alarim/presention/view/widget/info.dart';
@@ -10,14 +12,17 @@ class infodurg extends StatelessWidget {
 final Addmodel addmodel;
   @override
   Widget build(BuildContext context) {
+
     return Column(
+      
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-        addmodel.durgname,
+        
+        addmodel.docname,
           style: AppStyles.stylebold15(context),
         ),
-        info()
+        info(addmodel: addmodel,)
       ],
     );
   }

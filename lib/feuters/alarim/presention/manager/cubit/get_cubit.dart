@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ah/feuters/add/data/modeladdd.dart';
 import 'package:ah/feuters/add/prsention/manager/cubit/add_cubit.dart';
 import 'package:bloc/bloc.dart';
@@ -12,11 +14,12 @@ class GetCubit extends Cubit<GetState> {
     emit(Getload());
   // Open the Hive box
   try {
+     
   final box = await Hive.openBox<Addmodel>(boxName);
   
   // Fetch all instances of Addmodel from the box
   final List<Addmodel> dataList = box.values.toList();
-     
+   
   // Close the box after fetching data
   
   emit(Getsucess(alarim: dataList));

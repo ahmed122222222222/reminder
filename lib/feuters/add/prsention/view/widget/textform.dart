@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormFiled extends StatelessWidget {
   const CustomTextFormFiled(
-      {super.key, required this.titel, required this.action, required String title});
+      {super.key, required this.titel, required this.action, required String title,required this.onSaved});
   final String titel, action;
+
+ final void Function(String?)? onSaved;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,6 +21,11 @@ class CustomTextFormFiled extends StatelessWidget {
           height: 10,
         ),
         TextFormField(
+          validator: (value) {
+            if(value!.isEmpty)
+            return "هذا الحقل مطلوب ";
+           },
+          onChanged:onSaved ,
           decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),

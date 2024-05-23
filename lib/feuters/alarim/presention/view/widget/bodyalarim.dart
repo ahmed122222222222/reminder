@@ -23,7 +23,7 @@ class _BodalarimState extends State<Bodalarim> {
     return BlocBuilder<GetCubit, GetState>(
       builder: (context, state) {
        if(state is Getsucess) {
-        
+
         return ListView.builder(
           itemCount: state.alarim.length,
           itemBuilder: (context, index) =>  Padding(

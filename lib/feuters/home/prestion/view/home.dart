@@ -2,8 +2,11 @@ import 'package:ah/core/styel.dart';
 import 'package:ah/feuters/add/prsention/view/add.dart';
 import 'package:ah/feuters/alarim/presention/view/alrim.dart';
 import 'package:ah/feuters/home/prestion/view/widget/bodyhome.dart';
-
+import 'package:ah/feuters/home/prestion/view/widget/notifactionpending.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreeN extends StatefulWidget {
   const HomeScreeN({super.key});
@@ -25,18 +28,28 @@ class _HomeScreeNState extends State<HomeScreeN> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('d MMMM', 'ar').format(now);
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin= FlutterLocalNotificationsPlugin();  
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "23 يناير",
+          formattedDate,
           style: AppStyles.stylebold24(context),
         ),
-        actions: const [
+        actions:  [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Icon(
-              Icons.calendar_month,
-              color: Colors.blue,
+            child: GestureDetector(
+              onTap: ()=>Navigator.push(context,          MaterialPageRoute(
+            builder: (context) => NotificationsScreen(
+              flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
+            ),
+          ),),
+              child: Icon(
+                Icons.calendar_month,
+                color: Colors.blue,
+              ),
             ),
           )
         ],
